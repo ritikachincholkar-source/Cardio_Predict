@@ -5,6 +5,10 @@ import joblib
 import plotly.graph_objects as go
 from fpdf import FPDF
 
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+
 st.set_page_config(page_title="Heart Disease Risk Prediction", layout="centered")
 
 st.title("❤️ Heart Disease Risk Prediction")
@@ -12,12 +16,12 @@ st.write("Machine Learning-based risk assessment using clinical data (UCI Heart 
 
 @st.cache_resource
 def load_artifacts():
-    a = (joblib.load("heart_disease_model.pkl"),
-         joblib.load("heart_disease_scaler.pkl"),
-         joblib.load("heart_disease_columns.pkl"))
-    b = (joblib.load("heart_disease_model_no_thal.pkl"),
-         joblib.load("heart_disease_scaler_no_thal.pkl"),
-         joblib.load("heart_disease_columns_no_thal.pkl"))
+    a = (joblib.load(BASE_DIR / "heart_disease_model.pkl"),
+         joblib.load(BASE_DIR / "heart_disease_scaler.pkl"),
+         joblib.load(BASE_DIR / "heart_disease_columns.pkl"))
+    b = (joblib.load(BASE_DIR / "heart_disease_model_no_thal.pkl"),
+         joblib.load(BASE_DIR / "heart_disease_scaler_no_thal.pkl"),
+         joblib.load(BASE_DIR / "heart_disease_columns_no_thal.pkl"))
     return a, b
 
 (model_a, scaler_a, cols_a), (model_b, scaler_b, cols_b) = load_artifacts()
